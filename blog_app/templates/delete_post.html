@@ -1,0 +1,24 @@
+{%extends  'base.html' %}
+
+{% block body %}
+{% if user.is_authenticated %}
+    {% if user.id == post.auther.id  %}
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-control container mb-3 p-md-3 col-12">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12">
+                        <h3 style="text-align: center;">are you sure you are want to delete {{post.title}} post</h3>
+
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-danger col-md-6 mb-3 me-2">delete the post</button>
+                    <a href="{% url 'post' post.id %}" class="btn btn-primary col-md-6 mb-3 me-2">undo</a>
+
+                </div>
+            <div>
+        </form>
+    {% endif %}
+{% endif %}
+{%endblock%}

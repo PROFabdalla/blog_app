@@ -1,0 +1,17 @@
+{%extends  'base.html' %}
+{% load bootstrap %}
+
+{% block body %}
+{% if user.is_authenticated %}
+    <div class="form-control container">
+    <form method="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit" class="btn btn-outline-primary mt-2">create ..</button>
+    </div> 
+    </form>
+    <div>
+{% endif %}
+
+
+{%endblock%}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<h1 style="text-align: center;margin-bottom:20px;">avalable category</h1>
+<h2 style="text-align: center;margin-bottom:20px;">please subscribe the category you want</h2>
+{% for i in post %}
+
+<div class="container d-flex justify-content-center p-3" style="box-shadow: 5px 5px 5px 5px;margin-bottom: 15px;">
+    <div class="row">
+        <div class="col-12">
+            <img class="mb-2" src="{{ i.image.url }}" height="397px" width="100%"/>
+        </div>
+        <div class="col-12 d-flex justify-content-center mb-2">    
+            <a style="width: 100%;" href="{% url 'details' i.id %}"><div style="width: 100%;" class="btn btn-outline-primary">subscribe {{i.cat_name}}</div></a>
+        </div>
+        {% if user.is_superuser %}
+        <div class="col-12 d-flex justify-content-center mb-2">    
+            <a style="width: 100%;" href="{% url 'update_cat' i.id %}"><div style="width: 100%;" class="btn btn-outline-primary">update</div></a>
+        </div>
+        <div class="col-12 d-flex justify-content-center mb-4">    
+            <a style="width: 100%;" href="{% url 'Delete_cat' i.id %}"><div style="width: 100%;" class="btn btn-outline-danger">delete</div></a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+
+
+{% else %}
+<div class="alert alert-danger d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div>
+      you dont have permmition here ............
+    </div>
+  </div>
+
+{% endif %}
+
+{% endblock %}

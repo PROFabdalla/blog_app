@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div>
+{% if user.is_authenticated %}
+    {% if user.id == postd.auther.id %}
+        <div class="container d-flex justify-content-center">
+            <div class="row">
+                <div class="col-12"  style="box-shadow: 5px 3px 3px 5px;margin-bottom: 30px;"> 
+                    <img class="mb-5" src="{{ postd.image.url }}" height="400px" width="100%"/>
+                </div>
+                <div class="col-6 d-flex justify-content-center mb-5">    
+                    <a style="width: 100%;" href="{% url 'update_post' postd.id %}"><div style="width: 100%;" class="btn btn-outline-primary">update</div></a>
+                </div>
+                <div class="col-6 d-flex justify-content-center mb-5">    
+                    <a style="width: 100%;" href="{% url 'Delete_post' postd.id %}"><div style="width: 100%;" class="btn btn-danger">delete</div></a>
+                </div>
+                <div class="col-12 d-flex justify-content-center mb-5">    
+                    <a style="width: 100%;" href="{% url 'home' %}"><div style="width: 100%;" class="btn btn-outline-primary">back</div></a>
+    {% else %}
+                <div class="col-12"> 
+                    <img class="mb-5" src="{{ postd.image.url }}" height="400px" width="100%"/>
+                </div>
+                <div class="col-12 d-flex justify-content-center mb-5">    
+                    <a style="width: 100%;" href="{% url 'home' %}"><div style="width: 100%;" class="btn btn-outline-primary">back</div></a>
+                </div>
+    {% endif %}
+{% else %}
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                    you dont have the permmition to be here ....
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center mb-5">    
+                    <a style="width: 100%;" href="{% url 'home' %}"><div style="width: 100%;" class="btn btn-outline-primary">back</div></a>
+                </div>
+            </div>
+        </div>
+            
+    {% endif %}
+</div>
+<div class="w100">
+    <h2 style="text-align: center;background-color: rgba(173, 173, 125, 0.308);">{{postd.related_cat}}</h2>
+    <h2 style="text-align: center;background-color: rgba(46, 45, 45, 0.308);">{{postd.title}}</h2>
+</div>
+<div class="w100">
+    <h4>comments</h4>
+    {% for i in comments %}
+    <p>{{i.message}}</p>
+    <p>author : {{i.auther}}</p>
+    <p>time : {{i.created_at}}</p>
+    <a class="btn btn-outline-success" href="{% url 'update_com' i.id %}">update comment</a>
+    <a class="btn btn-outline-danger" href="{% url 'Delete_com' i.id %}">delete comment</a>
+    <hr>
+    {% endfor %}
+    <form action="{% url 'like_post' postd.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit", name="post_id" , value="{{ postd.id }}" class="btn btn-primary"><i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
+    </form>
+    <a class="btn btn-success mt-3" href="{% url 'comment' postd.id %}">add new comment to {{postd.title}}</a>
+</div>
+
+
+{% endblock %}

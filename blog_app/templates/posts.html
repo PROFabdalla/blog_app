@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+{% for i in postd %} 
+{% if user.is_authenticated %}
+        <div class="container d-flex justify-content-center mb-3 p-md-3" style="border: solid black 1px;border-radius: 15px;background-color: rgba(228, 240, 163, 0.281);box-shadow: 5px 3px 3px 5px;margin-bottom: 30px;">
+            <div class="row">
+                <div class="col-12">
+                    <img class="mb-2" src="{{ i.image.url }}" height="350px" width="100%"/>
+                </div>
+                <div class="col-12 d-flex justify-content-between mb-2">    
+                    <h5 style="text-align: center;" >post title : {{ i.title }}</h5>
+                    <h5 style="text-align: center;" >created by : {{ i.auther }}</h5>
+                    <h5 style="text-align: center;" >#{{ i.tags }}</h5>
+                </div>
+                <a class="mb-2" style="text-decoration: none;" href="{% url 'post' i.id %}"><div style="width: 100%;" class="btn btn-outline-primary">add comment</div></a>
+            </div>
+        </div>
+        {% endif %}
+{% endfor %}
+
+<div class="col-12 d-flex justify-content-center mb-5">    
+    <a style="width: 100%;" href="{% url 'home' %}"><div style="width: 100%;" class="btn btn-outline-primary">unsubscribe {{i.cat_name}}</div></a>
+</div>
+
+{%endblock%}
