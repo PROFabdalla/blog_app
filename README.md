@@ -1,9 +1,11 @@
-about the app
-- home page has ctegories
-- anyone can see ,like the posts and adding comments
-- post detail page has [tiltle, content , date posted,poster , post picture]
+## about the app
+- home page has categories
+- when a category is chosen it will redirect to apage that contains all the posts belongs to this category 
+- anyone can see and like the posts and adding comments
+- search by post title
+- post detail page has [tiltle, content ,poster , post picture, related category, related tags]
+- login and regestration pages
+- admin can CRUD on catigory
 - user can make post,
 - owner and admin can edit and delete that post
-- user profile ["username","name" ,"email" ,"favourate color","about auther","register date" ,"number of posts" , "profile pic" , "his posts" ]
-
 - admin can CRUD any thing from admin panal
